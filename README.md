@@ -1,1 +1,9 @@
-# predicting_conflict
+# Predicting Conflict in the Middle East
+## High-Level Description
+Conflict has been extensively studied, giving way to numerous theories behind its causes.  ‘Machine Learning and Conflict Prediction: A Use Case’  (https://poseidon01.ssrn.com/delivery.php?ID=949097084122112081125110004070086091032013032038091020066024107007020083010006123022049012018120037051097080106090114086122100009005008019049006098017107066102127108058047005024002102101067064012113109126090094098103027097114084104125079027123025003005&EXT=pdf) is an academic paper that utilized machine learning algorithms, namely Naïve Bayes and Random Forests, to predict violence in Africa. I would like to use this paper as a model, but instead of Africa, I would like to look at predicting conflict in the Middle East. 
+## Questions
+The most basic question this project would like to focus on is to determine what factors contribute to conflict the most, specifically in the Middle East.
+Some other questions that would be interesting to explore are:
+1.	Are there general trends in conflict that can be applied to an entire region- i.e. the Middle East- or are there sub-regions that can help explain conflict better? If no power of prediction is found at the regional level, it may be interesting to do cluster analysis on the data and observe other patterns that may emerge.
+2.	Does the model work better with aggregated data (i.e. total civil conflict score) or with individual types of conflict (i.e. ethnic conflict score).
+3.	My assumption is that Israel will be the country where conflict will be more difficult to predict because most of the ‘traditional’ indicators for conflict are usually poverty, low governance and rule of law scores. Israel’s scores in these areas are very high, yet, due to the political situation with the Palestinian territories, it experiences conflict.
