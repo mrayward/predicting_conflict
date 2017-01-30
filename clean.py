@@ -61,17 +61,9 @@ def clean_pts(pts):
 
     return pts
 
-def missing(country_name, value):
+def missing_pts(country_name, value):
     pts[pts['Country']==country_name]= pts[pts['Country']==country_name].fillna(value)
     return pts[pts['PTS'].isnull()]
-
-missing('Israel', 4)
-missing('Jordan', 3)
-missing('Oman', 2)
-missing('Lebanon',3)
-missing('Morocco', 3)
-missing('Libya', 3)
-missing('Qatar', 2)
 
 # STANDARDIZED INCOME INEQUALITY
 def gini_clean(gini):
@@ -166,6 +158,13 @@ if __name__ == "__main__":
     infant_mort = clean_world_bank_data(indicator7)
     accountability = clean_world_bank_data(indicator8)
     pts = clean_pts(pts)
+    missing_pts('Israel', 4)
+    missing_pts('Jordan', 3)
+    missing_pts('Oman', 2)
+    missing_pts('Lebanon',3)
+    missing_pts('Morocco', 3)
+    missing_pts('Libya', 3)
+    missing_pts('Qatar', 2)
     gini = gini_clean(gini)
     polity = polity_clean(polity)
     polity = missing_values_polity_a(polity)
