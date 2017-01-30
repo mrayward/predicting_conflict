@@ -9,15 +9,6 @@ middle_east_countries = ["Yemen People's Republic",'Yemen Arab Republic',\
  'Iran, Islamic Rep.']
 
  # WORLD BANK DATA CLEANING
-indicator1 = pd.read_excel('youth.xls')
-indicator2 = pd.read_excel('exports.xls')
-indicator3 = pd.read_excel('unemployment.xls')
-indicator4 = pd.read_excel('for_dir_inv.xls')
-indicator5 = pd.read_excel('fuel.xls')
-indicator6 = pd.read_excel('gdppercapita.xls')
-indicator7 = pd.read_excel('infmort.xls')
-indicator8 = pd.read_excel('accountability.xls')
-
  def clean_world_bank_data(indicator):
      """
      This function cleans any dataset downloaded from the World Bank. This
@@ -42,8 +33,6 @@ indicator8 = pd.read_excel('accountability.xls')
     return indicator
 
 # POLITICAL TERROR SCALE DATA CLEANING
-pts = pd.read_excel('PoliticalTerrorScale.xlsx')
-
 def clean_pts(pts):
     """
     This function cleans the political terror dataset, selecting the max
@@ -85,7 +74,6 @@ missing('Libya', 3)
 missing('Qatar', 2)
 
 # STANDARDIZED INCOME INEQUALITY
-gini = pd.io.stata.read_stata('SWIIDv5_0.dta')
 def gini_clean(gini):
     """
     This function cleans the standardized income inequality dataset, selecting
@@ -99,7 +87,6 @@ def gini_clean(gini):
 
 
 # POLITY: MEASURE OF HOW DEMOCRATIC/AUTOCRATIC A COUNTRY IS (score -10, 10)
-polity = pd.read_excel('polity.xls')
 def polity_clean(polity):
     """
     This function cleans the polity dataset, selecting
@@ -120,8 +107,7 @@ def missing_values_polity_a(polity):
     return polity
 
 #ETHNICITY
-ethnicities = pd.read_excel('ethnicities.xls')
-def ethnicity_data_clean(indicatr):
+def ethnicity_data_clean(ethnicities):
     '''
     This function takes in a dataframe and returns
     it with the number of ethnicities of a
@@ -134,10 +120,7 @@ def ethnicity_data_clean(indicatr):
     #still need to create a row for each year//now it's just grouped by country
     return ethnicities
 
-    indicatr = ethnicities
-
 #EMPOWERMENT
-empowerment = pd.read_excel('newempinix.xlsx')
 
 def empowerment_cleaning(empowerment):
     '''
@@ -145,9 +128,46 @@ def empowerment_cleaning(empowerment):
     it with the empowerment index of every country for a given year,
     dropping unnecessary columns and making it specific to Middle Eastern countries
     '''
-    empowerment = pd.read_excel(d)
     empowerment = empowerment[empowerment['CTRY'].isin(middle_east_countries)]
     cl_list = ['CTRY', 'YEAR', 'NEW_EMPINX']
     empowerment = empowerment[cl_list]
     empowerment.rename(columns={'YEAR': 'year', 'CTRY': 'country', 'NEW_EMPINX': 'empowerment_indx'}, inplace=True)
     return empowerment
+
+#TARGET DATA
+df = pd.read_excel('MEPV2015.xls')
+df = df.drop(['scode', 'ccode', 'ind', 'intind', 'intviol','intwar', 'civviol', 'civwar', 'ethviol', 'ethwar', 'actotal', 'nborder'], axis=1)
+df = df[df['country'].isin(middle_east_countries)]
+df['inttot']=df['inttot'].apply(lambda x: 1 if x >= 1 else x)
+df['civtot']=df['civtot'].apply(lambda x: 1 if x >= 1 else x)
+
+## Loading all the DATA
+indicator1 = pd.read_excel('youth.xls')
+indicator2 = pd.read_excel('exports.xls')
+indicator3 = pd.read_excel('unemployment.xls')
+indicator4 = pd.read_excel('for_dir_inv.xls')
+indicator5 = pd.read_excel('fuel.xls')
+indicator6 = pd.read_excel('gdppercapita.xls')
+indicator7 = pd.read_excel('infmort.xls')
+indicator8 = pd.read_excel('accountability.xls')
+pts = pd.read_excel('PoliticalTerrorScale.xlsx')
+gini = pd.io.stata.read_stata('SWIIDv5_0.dta')
+polity = pd.read_excel('polity.xls')
+ethnicities = pd.read_excel('ethnicities.xls')
+empowerment = pd.read_excel('newempinix.xlsx')
+
+if __name__ == "__main__":
+    youth = clean_world_bank_data(indicator1)
+    exports = clean_world_bank_data(indicator2)
+    unemployment = clean_world_bank_data(indicator3)
+    foreign_dir_inv = clean_world_bank_data(indicator4)
+    fuel_exports = clean_world_bank_data(indicator5)
+    gdppercapita = clean_world_bank_data(indicator6)
+    infant_mort = clean_world_bank_data(indicator7)
+    accountability = clean_world_bank_data(indicator8)
+    pts = clean_pts(pts)
+    gini = gini_clean(gini)
+    polity = polity_clean(polity)
+    polity = missing_values_polity_a(polity)
+    ethnicities = ethnicity_data_clean(ethnicities)
+    empowerment = empowerment_cleaning(empowerment)
