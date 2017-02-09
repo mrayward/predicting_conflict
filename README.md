@@ -1,4 +1,4 @@
-# Predicting Conflict in the Middle East
+# The Missing Peace
 ## Project Overview
 Conflict has been extensively studied, giving way to numerous theories behind its causes. With a background in conflict resolution, I wanted to see how machine learning techniques would perform in trying to predict conflict.
 For this project, I specifically focused in the MENA region, in the post-World War II era and I examined exclusively intra-state conflict. That is, conflict that happens within one nation’s borders.
