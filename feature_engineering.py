@@ -152,7 +152,7 @@ if __name__ == "__main__":
     united10 = merge_datasets(united9, all_infant_mort)
     united11 = merge_datasets(united10, all_fuel_exports)
 
-    # m.rename(columns={'Country Name': 'country'}, inplace=True)
-    # al = pd.merge(target, m, how='left', on=['year', 'country'])
-    #
-    # al.to_csv('al.csv')
+    united11.rename(columns={'Country Name': 'country'}, inplace=True)
+    al = pd.merge(target, united11, how='left', on=['year', 'country'])
+    
+    al.to_csv('al.csv')
